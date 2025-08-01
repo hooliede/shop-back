@@ -1,14 +1,29 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-import User from './User';
+import User from "./User";
+import Product from "./Product";
 
 // 스키마 만들기
 const cartSchema = Schema(
   {
-   userId: {
-    type: mongoose.ObjectId, ref:User,
-
-   }
+    userId: {
+      type: mongoose.ObjectId,
+      ref: User,
+    },
+    items: [
+      {
+        productId: { type: mongoose.ObjectId, ref: Product },
+        size: {
+          type: String,
+          required: true,
+        },
+        qty: {
+          type: Number,
+          default: 1,
+          required: true,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

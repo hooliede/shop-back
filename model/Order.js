@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
 import User from "./User";
-import Product from "/Product";
+import Product from "./Product";
 
 // 스키마 만들기
 const orderSchema = Schema(
@@ -20,7 +21,10 @@ const orderSchema = Schema(
     },
     items: [
       {
-        productId: { type: mongoose.ObjectId, ref: Product },
+        productId: { 
+            type: mongoose.ObjectId, 
+            ref: Product, 
+         },
         size: {
           type: String,
           required: true,
