@@ -7,7 +7,7 @@ userController.createUser = async (req, res) => {
   try {
     const { name, password, email, level } = req.body;
     const user = await User.findOne({ email: email });
-    if(user){
+    if (user) {
       throw new Error("User already exist");
     }
     const salt = await bcryptjs.genSaltSync(10);
@@ -25,4 +25,16 @@ userController.createUser = async (req, res) => {
   }
 };
 
+userController.getUser = async (req, res) => {
+  try {
+    const { userId } = req;
+    const user = await User.findById(userId);
+    if (user) {
+      res.status(200).json({ status: "success", user });
+    }
+    throw new Error("Invalid token");
+  } catch (error) {
+    res.status(400).json({status:"fail", error:error.message});
+  }
+};
 module.exports = userController;
