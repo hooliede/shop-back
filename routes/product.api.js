@@ -10,5 +10,5 @@ router.post(
   authController.checkAdminPermission, // authenticate에서 token 정보가 있어서 미들웨어에 추가
   productController.createProduct
 );
-
+router.get("/",productController.getProducts);
 module.exports = router;
