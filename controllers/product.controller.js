@@ -29,6 +29,9 @@ productController.createProduct = async (req, res) => {
     await product.save();
     res.status(200).json({ status: "success", product });
   } catch (error) {
+    if(error.code === 11000){
+      return res.status(400).json({status:"fail", error: "이미 등록된 sku입니다."});
+    }
     res.status(400).json({ status: "fail", error: error.message });
   }
 };
